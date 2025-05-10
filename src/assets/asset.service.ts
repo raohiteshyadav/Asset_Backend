@@ -195,6 +195,7 @@ export class AssetService {
       throw error;
     }
   }
+
   async createLaptopBulk(dtos: CreateLaptopDto[]) {
     const laptops: Laptop[] = [];
     const skippedLaptops: string[] = [];

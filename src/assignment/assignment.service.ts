@@ -276,4 +276,69 @@ export class AssignmentService {
       assetDetails: assetDetails,
     };
   }
+
+  async getAssets(assetType: AssetType, page: number, limit: number) {
+    const offset = (page - 1) * limit;
+  
+    if (!assetType) {
+      throw new BadRequestException('Select any one type of asset');
+    }
+  
+    let repo: EntityRepository<any>;
+  
+    switch (assetType) {
+      case AssetType.LAPTOP:
+        repo = this.laptopRepo;
+        break;
+      case AssetType.DESKTOP:
+        repo = this.desktopRepo;
+        break;
+      case AssetType.AP:
+        repo = this.apRepo;
+        break;
+      case AssetType.CCTV:
+        repo = this.cctvRepo;
+        break;
+      case AssetType.HARD_DISK:
+        repo = this.hardDiskRepo;
+        break;
+      case AssetType.IP_PHONE:
+        repo = this.ipPhoneRepo;
+        break;
+      case AssetType.NETWORK_DEVICE:
+        repo = this.networkDeviceRepo;
+        break;
+      case AssetType.NVR:
+        repo = this.nvrRepo;
+        break;
+      case AssetType.OTHER:
+        repo = this.otherRepo;
+        break;
+      case AssetType.PRINTER:
+        repo = this.printerRepo;
+        break;
+      case AssetType.PROJECTOR:
+        repo = this.projectorRepo;
+        break;
+      case AssetType.PUNCH_MACHINE:
+        repo = this.punchMachineRepo;
+        break;
+      case AssetType.SWITCH:
+        repo = this.switchRepo;
+        break;
+      default:
+        throw new BadRequestException(`Unsupported asset type: ${assetType}`);
+    }
+  
+    const [assets, totalCount] = await Promise.all([
+      repo.findAll({ limit, offset }),
+      repo.count(),
+    ]);
+  
+    return {
+      assets,
+      totalCount,
+    };
+  }
+
 }

@@ -13,6 +13,8 @@ import {
   CreateProjectorDto,
   CreatePunchMachineDto,
   CreateSwitchDto,
+  CreatePrinterBulkDto,
+  CreateLaptopBulkDto,
 } from './dto/asset.dto';
 import { AssetService } from './asset.service';
 
@@ -30,14 +32,17 @@ export class AssetController {
   }
 
   @Post('create-laptop-bulk')
-  async createLaptopBulk(@Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true })) dtos: CreateLaptopDto[]): Promise<{
+  async createLaptopBulk(
+    @Body()
+    dtos: CreateLaptopBulkDto,
+  ): Promise<{
     message: string;
     skippedLaptops: string[];
     createdCount: number;
     skippedCount: number;
     status: 201;
   }> {
-    return this.assetService.createLaptopBulk(dtos);
+    return this.assetService.createLaptopBulk(dtos.items);
   }
 
   @Post('create-desktop')
@@ -70,7 +75,10 @@ export class AssetController {
   }
 
   @Post('create-ap-bulk')
-  async createApBulk(@Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true })) dtos: CreateApDto[]): Promise<{
+  async createApBulk(
+    @Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+    dtos: CreateApDto[],
+  ): Promise<{
     message: string;
     skippedItems: string[];
     createdCount: number;
@@ -90,7 +98,10 @@ export class AssetController {
   }
 
   @Post('create-cctv-bulk')
-  async createCctvBulk(@Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true })) dtos: CreateCctvDto[]): Promise<{
+  async createCctvBulk(
+    @Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+    dtos: CreateCctvDto[],
+  ): Promise<{
     message: string;
     skippedItems: string[];
     createdCount: number;
@@ -110,7 +121,10 @@ export class AssetController {
   }
 
   @Post('create-hard-disk-bulk')
-  async createHardDiskBulk(@Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true })) dtos: CreateHardDiskDto[]): Promise<{
+  async createHardDiskBulk(
+    @Body()
+    dtos: CreateHardDiskDto[],
+  ): Promise<{
     message: string;
     skippedItems: string[];
     createdCount: number;
@@ -130,7 +144,10 @@ export class AssetController {
   }
 
   @Post('create-ip-phone-bulk')
-  async createIpPhoneBulk(@Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true })) dtos: CreateIpPhoneDto[]): Promise<{
+  async createIpPhoneBulk(
+    @Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+    dtos: CreateIpPhoneDto[],
+  ): Promise<{
     message: string;
     skippedItems: string[];
     createdCount: number;
@@ -150,7 +167,10 @@ export class AssetController {
   }
 
   @Post('create-network-device-bulk')
-  async createNetworkDeviceBulk(@Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true })) dtos: CreateNetworkDeviceDto[]): Promise<{
+  async createNetworkDeviceBulk(
+    @Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+    dtos: CreateNetworkDeviceDto[],
+  ): Promise<{
     message: string;
     skippedItems: string[];
     createdCount: number;
@@ -170,7 +190,10 @@ export class AssetController {
   }
 
   @Post('create-nvr-bulk')
-  async createNvrBulk(@Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true })) dtos: CreateNvrDto[]): Promise<{
+  async createNvrBulk(
+    @Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+    dtos: CreateNvrDto[],
+  ): Promise<{
     message: string;
     skippedItems: string[];
     createdCount: number;
@@ -190,7 +213,7 @@ export class AssetController {
   }
 
   @Post('create-other-bulk')
-  async createOtherBulk(@Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true })) dtos: CreateOtherDto[]): Promise<{
+  async createOtherBulk(@Body() dtos: CreateOtherDto[]): Promise<{
     message: string;
     skippedItems: string[];
     createdCount: number;
@@ -210,14 +233,14 @@ export class AssetController {
   }
 
   @Post('create-printer-bulk')
-  async createPrinterBulk(@Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true })) dtos: CreatePrinterDto[]): Promise<{
+  async createPrinterBulk(@Body() dtos: CreatePrinterBulkDto): Promise<{
     message: string;
     skippedItems: string[];
     createdCount: number;
     skippedCount: number;
     status: 201;
   }> {
-    return this.assetService.createPrinterBulk(dtos);
+    return this.assetService.createPrinterBulk(dtos.items);
   }
 
   @Post('create-projector')
@@ -230,7 +253,10 @@ export class AssetController {
   }
 
   @Post('create-projector-bulk')
-  async createProjectorBulk(@Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true })) dtos: CreateProjectorDto[]): Promise<{
+  async createProjectorBulk(
+    @Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+    dtos: CreateProjectorDto[],
+  ): Promise<{
     message: string;
     skippedItems: string[];
     createdCount: number;
@@ -250,7 +276,10 @@ export class AssetController {
   }
 
   @Post('create-punch-machine-bulk')
-  async createPunchMachineBulk(@Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true })) dtos: CreatePunchMachineDto[]): Promise<{
+  async createPunchMachineBulk(
+    @Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+    dtos: CreatePunchMachineDto[],
+  ): Promise<{
     message: string;
     skippedItems: string[];
     createdCount: number;
@@ -270,7 +299,10 @@ export class AssetController {
   }
 
   @Post('create-switch-bulk')
-  async createSwitchBulk(@Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true })) dtos: CreateSwitchDto[]): Promise<{
+  async createSwitchBulk(
+    @Body(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+    dtos: CreateSwitchDto[],
+  ): Promise<{
     message: string;
     skippedItems: string[];
     createdCount: number;
@@ -280,8 +312,8 @@ export class AssetController {
     return this.assetService.createSwitchBulk(dtos);
   }
 
-@Get('stats')
-async getAllStats() {
-  return this.assetService.getAllAssetStats();
-}
+  @Get('stats')
+  async getAllStats() {
+    return this.assetService.getAllAssetStats();
+  }
 }
